@@ -6,6 +6,7 @@ import API from "../../utils/API";
 class EmployeeDirectory extends Component {
     state = {
         filter: "",
+        filterBy: "none",
         displayList: [],
         employeeList: [],
     }
@@ -26,22 +27,42 @@ class EmployeeDirectory extends Component {
             .catch(err => console.log(err)) // TODO: make a bar that is visible/invisible with opacity setting
     }
 
-    handleFilterInput = event => {
+    handleFilterChange= event => {
         const name = event.target.name;
         const value = event.target.value;
 
         // first filter the list
-        let filteredList = this.state.employeeList.filter(employee => employee.name.first.toUpperCase().startsWith(value.toUpperCase()));
+        let filteredList = [];
+        if(this.state.filterBy === "first"){
+            filteredList = this.state.employeeList.filter(employee => employee.name.first.toUpperCase().startsWith(value.toUpperCase()));
+        }else if(this.state.filterBy === "last"){
+            filteredList = this.state.employeeList.filter(employee => employee.name.last.toUpperCase().startsWith(value.toUpperCase()));            
+        } else if(this.state.filterBy === "city"){
+            filteredList = this.state.employeeList.filter(employee => employee.location.city.toUpperCase().startsWith(value.toUpperCase()));            
+        } else if(this.state.filterBy === "state"){
+            filteredList = this.state.employeeList.filter(employee => employee.location.state.toUpperCase().startsWith(value.toUpperCase()));            
+        } else if(this.state.filterBy === "cell"){
+            filteredList = this.state.employeeList.filter(employee => employee.cell.toUpperCase().startsWith(value.toUpperCase()));            
+        } else if(this.state.filterBy === "email"){
+            filteredList = this.state.employeeList.filter(employee => employee.email.toUpperCase().startsWith(value.toUpperCase()));            
+        } else {
+            // this.state.filterBy === "none" || this.state.filterBy === "clear"
+            filteredList = this.state.employeeList;
+        }
         
         this.setState({
             [name]: value,
             displayList: filteredList
         });
-        
-        console.log(this.state.displayList);
-        console.log(this.state.employeeList)
-
     };
+
+    handleFilterByChange = event => {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            [name]: value
+        })
+    }
 
     // TODO: add in city and state
     sortBy = (sortField, ascOrDesc) => {
@@ -77,7 +98,7 @@ class EmployeeDirectory extends Component {
                 <div className="row">
                     <div className="col-md-3"></div>
                     <div className="col-md-6">
-                        <Filter filter={this.state.filter} handleInputChange={this.handleFilterInput} />
+                        <Filter filter={this.state.filter} handleFilterChange={this.handleFilterChange} handleFilterByChange={this.handleFilterByChange} />
                     </div>
                 </div>
                 <div className="col-md-3"></div>
