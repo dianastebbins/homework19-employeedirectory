@@ -11,12 +11,9 @@ function Filter(props) {
           name="filter"
           type="text"
           className="form-control"
-          placeholder="Filter employee listing"
+          placeholder="Filter by first name, 'enter' to clear filter"
           id="filter"
         />
-        {/* <button onClick={props.handleFormSubmit} className="btn btn-primary mt-3">
-          Filter
-        </button> */}
       </div>
     </form>
   );

@@ -3,7 +3,7 @@ import Table from "../Table";
 import Filter from "../Filter";
 import API from "../../utils/API";
 
-class DirectoryContainer extends Component {
+class EmployeeDirectory extends Component {
     state = {
         filter: "",
         displayList: [],
@@ -31,7 +31,7 @@ class DirectoryContainer extends Component {
         const value = event.target.value;
 
         // first filter the list
-        let filteredList = this.state.employeeList.filter(employee => employee.name.first.startsWith(value));
+        let filteredList = this.state.employeeList.filter(employee => employee.name.first.toUpperCase().startsWith(value.toUpperCase()));
         
         this.setState({
             [name]: value,
@@ -91,4 +91,4 @@ class DirectoryContainer extends Component {
     }
 }
 
-export default DirectoryContainer;
+export default EmployeeDirectory;
