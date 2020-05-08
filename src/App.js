@@ -1,10 +1,9 @@
 import React from 'react';
-// import DirectoryContainer from './components/DirectoryContainer';
-import DirectoryContainer from "./components/DirectoryContainer/";
+import EmployeeDirectory from "./components/EmployeeDirectory";
 import './App.css';
 
 function App() {
-  return <DirectoryContainer />;
+  return <EmployeeDirectory />;
 }
 
 export default App;
